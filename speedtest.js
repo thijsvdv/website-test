@@ -54,6 +54,9 @@ function capture(sizes, callback) {
       page.onResourceError = function(resourceError) {
           page.reason = resourceError.errorString;
           page.reason_url = resourceError.url;
+
+          log(page.reason);
+          log(page.reason_url);
       };
       // page.onError(function() {
       //   //Ignore errors.
