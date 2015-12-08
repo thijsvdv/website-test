@@ -1,4 +1,6 @@
 <?php
+// V 0.1
+
 header('Content-type: application/octet-stream');
 header("Access-Control-Allow-Origin: *");
 // header("Content-type: text/plain");
@@ -25,8 +27,6 @@ if (function_exists('apache_setenv')) {
     apache_setenv('dont-vary', '1');
 }
 
-// $cmd = "ping 127.0.0.1";
-// $cmd = './phantomjs/bin/phantomjs ./capture.js "http://www.3sign.be"';
 $cmd = 'node ./scrape.js "' . $_GET['url'] . '"';
 
 $descriptorspec = array(

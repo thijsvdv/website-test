@@ -1,3 +1,5 @@
+// V 0.1
+
 var phantom = require('node-phantom');
 
 var async = require('async');
@@ -127,7 +129,6 @@ log(url);
       $('link[rel="alternate"][media*="max-width"]').filter(function() {
         var data = $(this);
         if(data.attr('href') !== undefined) {
-          // console.log(data.attr('href'));
           json.mobilesite = data.attr('href');
         }
       });
