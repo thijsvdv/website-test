@@ -133,6 +133,22 @@ log(url);
         }
       });
 
+      var i = 0;
+      $('style').filter(function() {
+
+        var data = $(this);
+        if(data.children().length === 0) {
+          i++;
+          var css = data.text();
+              css = css.split('@import url("');
+              css.forEach(function(u) {
+                if(u !== '') {
+                  json.stylesheets.push(u.replace('");', ''));
+                }
+              });
+        }
+      });
+
       $("h1").filter(function() {
         var data = $(this);
         json['h1_length'] = data.text().length;
