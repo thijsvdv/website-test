@@ -124,6 +124,14 @@ log(url);
       });
       // console.log(++load);
 
+      $('link[rel="alternate"][media*="max-width"]').filter(function() {
+        var data = $(this);
+        if(data.attr('href') !== undefined) {
+          // console.log(data.attr('href'));
+          json.mobilesite = data.attr('href');
+        }
+      });
+
       $("h1").filter(function() {
         var data = $(this);
         json['h1_length'] = data.text().length;
