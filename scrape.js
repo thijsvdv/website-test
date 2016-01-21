@@ -180,103 +180,104 @@ log(url);
       });
       // console.log(++load);
 
-      // json.words += ' ' + $('body').clone().find('script').remove().end().text();
-      // json.words = json.words; //.replace(/[^\w\s]/gi, "").replace( /\s+/g, ",");
+      // LATERZ
+        // json.words += ' ' + $('body').clone().find('script').remove().end().text();
+        // json.words = json.words; //.replace(/[^\w\s]/gi, "").replace( /\s+/g, ",");
 
 
 
 
-      // var strip_words = ['een', 'de', 'van', 'met', 'in', 'op', 'het', 'heel', 'zeer', 'nogal',
-      // 'er', 'je', 'zij', 'ze', 'we', 'wij', 'jou', 'hem', 'haar', 'hun', 'is', 'nu', 'ons', 'dat',
-      // 'al', 'bij', 'zal', 'deze', 'die', 'af', 'zijn', 'en', 'uw', 'u', 'voor', 'onze', 'naar',
-      // 'te', 'of', 'niet', 'was'];
-      // var max = {
-      //     single: 0,
-      //     double: 0,
-      //     triple: 0
-      // }
+        // var strip_words = ['een', 'de', 'van', 'met', 'in', 'op', 'het', 'heel', 'zeer', 'nogal',
+        // 'er', 'je', 'zij', 'ze', 'we', 'wij', 'jou', 'hem', 'haar', 'hun', 'is', 'nu', 'ons', 'dat',
+        // 'al', 'bij', 'zal', 'deze', 'die', 'af', 'zijn', 'en', 'uw', 'u', 'voor', 'onze', 'naar',
+        // 'te', 'of', 'niet', 'was'];
+        // var max = {
+        //     single: 0,
+        //     double: 0,
+        //     triple: 0
+        // }
 
 
-      // function exlude_words(string) {
-      //     var input = string.replace(/[^\w\s]/gi, "").replace( /\s+/g, ",").split(',');
-      //     return input.filter(function(el) {
-      //         return strip_words.indexOf(el.toLowerCase()) < 0;
-      //     });
-      // }
+        // function exlude_words(string) {
+        //     var input = string.replace(/[^\w\s]/gi, "").replace( /\s+/g, ",").split(',');
+        //     return input.filter(function(el) {
+        //         return strip_words.indexOf(el.toLowerCase()) < 0;
+        //     });
+        // }
 
-      // function createDoubleCombinations(words) {
-      //     var combinations = [];
-      //     for(var i=0, j=words.length; i<j-1; i++) {
-      //         combinations.push(words[i] + ' ' + words[i+1]);
-      //     }
-      //     return combinations;
-      // }
+        // function createDoubleCombinations(words) {
+        //     var combinations = [];
+        //     for(var i=0, j=words.length; i<j-1; i++) {
+        //         combinations.push(words[i] + ' ' + words[i+1]);
+        //     }
+        //     return combinations;
+        // }
 
-      // function createTripleCombinations(words) {
-      //     var combinations = [];
-      //     for(var i=0, j=words.length; i<j-2; i++) {
-      //         combinations.push(words[i] + ' ' + words[i+1] + ' ' + words[i+2]);
-      //     }
-      //     return combinations;
-      // }
+        // function createTripleCombinations(words) {
+        //     var combinations = [];
+        //     for(var i=0, j=words.length; i<j-2; i++) {
+        //         combinations.push(words[i] + ' ' + words[i+1] + ' ' + words[i+2]);
+        //     }
+        //     return combinations;
+        // }
 
-      // function countOccurences(words, num) {
-      //     var count_words = {};
-      //     words.forEach(function(word) {
-      //         if(count_words[word] === undefined) {
-      //             count_words[word] = 1;
-      //         } else {
-      //             count_words[word] = count_words[word]+1;
-      //             if(count_words[word]+1 > max[num]) {
-      //                 max[num] = count_words[word];
-      //             }
-      //         }
-      //     });
-      //     return count_words;
-      // }
+        // function countOccurences(words, num) {
+        //     var count_words = {};
+        //     words.forEach(function(word) {
+        //         if(count_words[word] === undefined) {
+        //             count_words[word] = 1;
+        //         } else {
+        //             count_words[word] = count_words[word]+1;
+        //             if(count_words[word]+1 > max[num]) {
+        //                 max[num] = count_words[word];
+        //             }
+        //         }
+        //     });
+        //     return count_words;
+        // }
 
-      // function listOccurences(words, num) {
-      //     var word_count = [];
-      //     for(var i=1; i<=max[num]; i++) {
-      //         word_count[i] = [];
-      //     }
-      //     // console.log('word_count', word_count);
-      //     console.log(words);
+        // function listOccurences(words, num) {
+        //     var word_count = [];
+        //     for(var i=1; i<=max[num]; i++) {
+        //         word_count[i] = [];
+        //     }
+        //     // console.log('word_count', word_count);
+        //     console.log(words);
 
-      //     for(var word in words) {
-      //         if(word !== '' && word !== null && word !== undefined && word !== " ") {
-      //           console.log('word "' + word +'"');
-      //           console.log(words[word]);
-      //           word_count[words[word]].push(word);
-      //         }
-      //     }
+        //     for(var word in words) {
+        //         if(word !== '' && word !== null && word !== undefined && word !== " ") {
+        //           console.log('word "' + word +'"');
+        //           console.log(words[word]);
+        //           word_count[words[word]].push(word);
+        //         }
+        //     }
 
-      //     return word_count;
-      // }
+        //     return word_count;
+        // }
 
-      // var clean_title = exlude_words(json.title);
-      // var single_words = exlude_words(json.words);
-      // var doubleCombinationsText = createDoubleCombinations(exlude_words(json.words));
-      // var tripleCombinationsText = createTripleCombinations(exlude_words(json.words));
-      // // var doubleCombinationsTitle = createDoubleCombinations(clean_title);
-      // // var tripleCombinationsTitle = createTripleCombinations(clean_title);
+        // var clean_title = exlude_words(json.title);
+        // var single_words = exlude_words(json.words);
+        // var doubleCombinationsText = createDoubleCombinations(exlude_words(json.words));
+        // var tripleCombinationsText = createTripleCombinations(exlude_words(json.words));
+        // // var doubleCombinationsTitle = createDoubleCombinations(clean_title);
+        // // var tripleCombinationsTitle = createTripleCombinations(clean_title);
 
-      // // console.log('single_words', single_words);
-      // // console.log('doubleCombinations', doubleCombinationsText);
-      // // console.log('tripleCombinations', tripleCombinationsText);
+        // // console.log('single_words', single_words);
+        // // console.log('doubleCombinations', doubleCombinationsText);
+        // // console.log('tripleCombinations', tripleCombinationsText);
 
-      // var num_single = countOccurences(single_words, 'single');
-      // var num_double = countOccurences(doubleCombinationsText, 'double');
-      // var num_triple = countOccurences(tripleCombinationsText, 'triple');
+        // var num_single = countOccurences(single_words, 'single');
+        // var num_double = countOccurences(doubleCombinationsText, 'double');
+        // var num_triple = countOccurences(tripleCombinationsText, 'triple');
 
-      // // console.log('num_single', num_single);
-      // // console.log('num_double', num_double);
-      // // console.log('num_triple', num_triple);
-      // // console.log(max);
+        // // console.log('num_single', num_single);
+        // // console.log('num_double', num_double);
+        // // console.log('num_triple', num_triple);
+        // // console.log(max);
 
-      // json.list_single = listOccurences(num_single, 'single');
-      // json.list_double = listOccurences(num_double, 'double');
-      // json.list_triple = listOccurences(num_triple, 'triple');
+        // json.list_single = listOccurences(num_single, 'single');
+        // json.list_double = listOccurences(num_double, 'double');
+        // json.list_triple = listOccurences(num_triple, 'triple');
 
 
 
@@ -413,7 +414,7 @@ log(url);
 
       log('5');
 
-      if($("body").text().indexOf("www.google-analytics.com/analytics.js") > 0 || $("head").text().indexOf("www.google-analytics.com/analytics.js") > 0) {
+      if($("body").text().indexOf("www.google-analytics.com/analytics.js") > 0 || $("head").text().indexOf("www.google-analytics.com/analytics.js") > 0 || $("head").text().indexOf("google-analytics.com/ga.js") > 0 || $("body").text().indexOf("google-analytics.com/ga.js") > 0) {
         json.analytics = "Analytics is geïnstalleerd.";
         json.has_analytics = 1;
       }
