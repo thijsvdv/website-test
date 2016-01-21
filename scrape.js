@@ -61,8 +61,18 @@ log(url);
   }, 60000);
 
 
-  request(url, function(error, response, html) {
-    if(!error) {
+
+  var options = {
+    url: url,
+    headers: {
+      'User-Agent': 'request'
+    }
+  };
+
+  request(options, function(error, response, html) {
+    // console.log(response.statusCode);
+    if(!error && response.statusCode === 200) {
+      // console.log(html);
       var $ = cheerio.load(html);
       var title, release, rating;
       // var json = { "title" : "", "h1" : "", "h2" : "", "description" : ""};
@@ -318,7 +328,7 @@ log(url);
         }
       });
 
-log('1');
+      log('1');
 
       if(json.link_fb === undefined || json.link_fb === '') {
         $('body').find('a[href*="facebook.com"]').each(function() {
@@ -357,7 +367,7 @@ log('1');
         });
       }
 
-log('2');
+      log('2');
 
       if(json.link_tw === undefined || json.link_tw === '') {
         $('body').find('a[href*="twitter.com"]').each(function() {
@@ -379,7 +389,7 @@ log('2');
         });
       }
 
-log('3');
+      log('3');
 
       if(json.link_yt === undefined || json.link_yt === '') {
         $('body').find('a[href*="youtube.com"]').each(function() {
@@ -390,7 +400,7 @@ log('3');
         });
       }
 
-log('4');
+      log('4');
 
       if(json.link_li === undefined || json.link_li === '') {
         $('body').find('a[href*="linkedin.com"]').each(function() {
@@ -401,14 +411,16 @@ log('4');
         });
       }
 
-log('5');
+      log('5');
 
       if($("body").text().indexOf("www.google-analytics.com/analytics.js") > 0 || $("head").text().indexOf("www.google-analytics.com/analytics.js") > 0) {
         json.analytics = "Analytics is geïnstalleerd.";
         json.has_analytics = 1;
       }
 
-log('6 ' + done);
+      log('6 ' + done);
+
+      // console.log($('head').html());
 
       $("head").filter(function() {
         var data = $(this);
@@ -444,7 +456,7 @@ log('6 ' + done);
       });
       // console.log(++load);
 
-log('7 ' + done);
+      log('7 ' + done);
       if(json.stylesheets.length > 0) {
         json.stylesheets.forEach(function(link) {
           // console.log(link);
@@ -465,7 +477,7 @@ log('7 ' + done);
         });
       }
 
-log('8 ' + done);
+      log('8 ' + done);
 
       request(urls[0] + '/sitemap.xml', function(error, response, html){
         if(!error) {
@@ -478,7 +490,7 @@ log('8 ' + done);
         }
       });
 
-log('9 ' + done);
+      log('9 ' + done);
 
       var loop = setInterval(function() {
         log('done: ' + done);
@@ -490,7 +502,7 @@ log('9 ' + done);
         }
       }, 3000);
 
-log('10 ' + done);
+      log('10 ' + done);
 
     } else {
       console.log(error);
