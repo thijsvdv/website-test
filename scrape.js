@@ -454,7 +454,9 @@ log('7 ' + done);
             log(error);
             if(!error){
               var $ = cheerio.load(html);
-              var mq = html.match(/@media[^{]*(?:(?!\}\s*\}))*/gmi);
+              // var mq = html.match(/@media[^{]*(?:(?!\}\s*\}))*/gmi); // Wrong results
+              var mq = html.match(/@media[A-Za-z\s]*[\(][^{]*/gmi);
+
               // console.log(mq);
               json.mediaqueries.push(mq);
               done = true;
