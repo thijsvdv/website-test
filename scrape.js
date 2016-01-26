@@ -131,9 +131,10 @@ log(url);
       log(real_url);
 
       var base = url;
-      if($("base").length > 0 && $("base").attr('href') !== undefined && $("base").attr('href').length > 0) {
-        base = $("base").attr('href');
-      }
+      // if($("base").length > 0 && $("base").attr('href') !== undefined && $("base").attr('href').length > 0) {
+      //   base = $("base").attr('href');
+      // }
+      // console.log("base: " + base);
 
       if(base.slice(-1) !== '/') base += '/';
 
@@ -142,7 +143,7 @@ log(url);
       // var mq = html.match(/(?:[^\'\"])(\S*\.css[^\'"])/gmi);
       // var mq = html.match(/(?:[\'\"])(\S*\.css)/gmi);
       var mq = html.match(/([^\]\"][a-zA-Z0-9\/\.\-\_]*\.css)/gmi);
-      // console.log(mq);
+      console.log(mq);
       var uniqueArray = mq.map(function(item) {
 
         var url = "";
