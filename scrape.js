@@ -14,6 +14,10 @@ var url = process.argv[2];
 // var url = args[1]
 // var url = system.args[1];
 var site_url = url;
+
+var protocol = site_url.split('://');
+protocol = protocol[0];
+// console.log(protocol);
 // console.log("URL: " + url);
 
 var debug = false;
@@ -29,6 +33,32 @@ function log(data) {
 
 function isInt(value) {
   return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
+}
+
+function flatten(array, mutable) {
+    var toString = Object.prototype.toString;
+    var arrayTypeStr = '[object Array]';
+
+    var result = [];
+    var nodes = (mutable && array) || array.slice();
+    var node;
+
+    if (!array.length) {
+        return result;
+    }
+
+    node = nodes.pop();
+
+    do {
+        if (toString.call(node) === arrayTypeStr) {
+            nodes.push.apply(nodes, node);
+        } else {
+            result.push(node);
+        }
+    } while (nodes.length && (node = nodes.pop()) !== undefined);
+
+    result.reverse(); // we reverse result to restore the original order
+    return result;
 }
 
 log(url);
@@ -73,6 +103,7 @@ log(url);
     // console.log(response.statusCode);
     if(!error && response.statusCode === 200) {
       // console.log(html);
+
       var $ = cheerio.load(html);
       var title, release, rating;
       // var json = { "title" : "", "h1" : "", "h2" : "", "description" : ""};
@@ -98,11 +129,6 @@ log(url);
       //Get real URL after redirects
       var real_url = response.request.uri.href;
       log(real_url);
-      // url = "http://www.callens-emk.be/nl/";
-      // url = url.replace('//', '||');
-      // url = url.split('/');
-      // url.pop();
-      // url = url.join('/').replace('||', '//');
 
       var base = url;
       if($("base").length > 0 && $("base").attr('href') !== undefined && $("base").attr('href').length > 0) {
@@ -110,6 +136,55 @@ log(url);
       }
 
       if(base.slice(-1) !== '/') base += '/';
+
+      //Stylesheets from source code
+      // var mq = html.match(/(?:href\=[\']?[\"]?)(\S*\.css)*/gmi);
+      // var mq = html.match(/(?:[^\'\"])(\S*\.css[^\'"])/gmi);
+      // var mq = html.match(/(?:[\'\"])(\S*\.css)/gmi);
+      var mq = html.match(/([^\]\"][a-zA-Z0-9\/\.\-\_]*\.css)/gmi);
+      // console.log(mq);
+      var uniqueArray = mq.map(function(item) {
+
+        var url = "";
+        if(item.indexOf('http') !== 0) {
+          if(item.indexOf('../') >= 0) {
+            var count = occurrences(item, '../', false);
+            var base_fragments = base.replace('//', '||').split('/');
+            base_fragments.pop();
+            for(var i=0; i<count; i++) {
+              base_fragments.pop();
+            }
+            url = base_fragments.join('/');
+            url = url.replace('||', '//');
+
+            item = item.replace(/\.\.\//g, '');
+            item = url + '/' + item;
+            // console.log(item);
+          } else if(item.indexOf('//') === 0) {
+            item = protocol + ':' + item;
+          } else {
+            item = base + item;
+            // console.log(item);
+          }
+        }
+        console.log(item);
+        return item;
+
+
+
+        // if(item.indexOf('http') === -1 && item.indexOf('//') !== 0) {
+        //   // log("PROBLEMATIC URL: " + item);
+        //   // return protocol + ':' + item;
+        //   return url + '/' + item;
+        // } else {
+        //   return item;
+        // }
+      })
+      json.stylesheets = uniqueArray.filter(function(item, pos, self) {
+        return self.indexOf(item) == pos;
+      });
+
+
       // console.log("base:", base);
 
       log('title?');
@@ -478,6 +553,7 @@ log(url);
         });
       }
 
+
       log('8 ' + done);
 
       request(urls[0] + '/sitemap.xml', function(error, response, html){
@@ -497,6 +573,14 @@ log(url);
         log('done: ' + done);
         if(done) {
           clearTimeout(stopTimer);
+
+
+          var test = flatten(json.mediaqueries, true);
+          json.mediaqueries = test.filter(function(item, pos, self) {
+            // TODO: filter out null
+            return self.indexOf(item) == pos;
+          });
+
           console.log('AIMERRORPREVENT');
           console.log(JSON.stringify(json, null, 4));
           clearInterval(loop);
